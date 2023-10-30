@@ -26,4 +26,21 @@ class BusinessContact(BaseContact):
     def contact(self):
         print(f'Wybieram numer {self.work_phone} i dzwonię do {self.first_name} {self.last_name} z firmy {self.company_name}')
 
-    
+def create_contacts(contact_type, count):
+    contacts = []
+    for _ in range(count):
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        phone = fake.phone_number()
+        email = fake.email()
+
+        if contact_type == BaseContact:
+            contact = BaseContact(first_name, last_name, phone, email)
+        elif contact_type == BusinessContact:
+            job_title = fake.job()
+            company_name = fake.company()
+            work_phone = fake.phone_number()
+            contact = BusinessContact(first_name, last_name, phone, email, job_title, company_name, work_phone)
+        contacts.append(contact)
+    return contacts
+
